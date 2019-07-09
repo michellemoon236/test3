@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
+  get 'tasks/:id/complete', to: "tasks#task_complete", as: 'task_complete'
+
   root 'users#home'
 end

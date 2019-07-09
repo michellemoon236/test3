@@ -7,4 +7,5 @@
 <p>Tasks</p>
 <% @project.tasks.select { |task| task.complete? == false }.each do |task| %>
 <li><%= task.content %> </li>
+<p><%= link_to "completed?", task_complete_path %><p>
 <% end %>
