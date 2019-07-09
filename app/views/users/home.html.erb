@@ -1,5 +1,12 @@
 
 <h1>Hi there, <%= @user.name %></h1>
+<p>Your Current Projects</p>
+<ul>
+<% @user.projects.each do |project| %>
+<li><%= link_to project.name, project_path(project) %></li>
+<% end %>
+</ul>
+<%= link_to "Create a new Project", new_project_path %><br>
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>

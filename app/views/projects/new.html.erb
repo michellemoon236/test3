@@ -1,29 +1,3 @@
-<h1>Project and Tasks </h1>
-   <%= form_for @project do |f| %>
-   <%= f.label :name %>
-   <%= f.text_field :name %>
-   <p>Team members on the project</p>
-   <%= f.collection_check_boxes :user_ids, User.all, :id, :name %>
-   <p>Tasks</p>
-   <%= f.fields_for :tasks, @project.tasks.build do |task| %>
-    <li><%= task.text_field :content %>
-    </li><br>
-    <% end %>
-       <%= f.fields_for :tasks, @project.tasks.build do |task| %>
-    <li><%= task.text_field :content %>
-    </li><br>
-    <% end %>
-       <%= f.fields_for :tasks, @project.tasks.build do |task| %>
-    <li><%= task.text_field :content %>
-    </li><br>
-    <% end %>
-<%= f.submit %>
-<% end %><br><br>
-
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='Logout'>
-<% end %>
-
-<%= form_tag ({controller: 'users', action: 'home', method: 'get'}) do %>
-  <input type=submit value='Home'>
-<% end %>
+<h1>New Project </h1>
+<%= render partial: 'form' %>
+   
