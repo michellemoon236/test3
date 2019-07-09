@@ -1,0 +1,10 @@
+<%= @project.name %>
+<ul> 
+<p>Teammates on this project</p>
+<% @project.users.each do |user| %>
+<li><%= user.name %></li>
+<% end %>
+<p>Tasks</p>
+<% @project.tasks.each do |task| %>
+<li><%= task.content %></li>
+<% end %>
