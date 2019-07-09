@@ -5,11 +5,13 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new 
+    4.times do 
+      @project.tasks.build
+    end
   end
 
   def create 
     @project = Project.create(project_params)
-    binding.pry
     redirect_to project_path(@project)
   end
 
@@ -23,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+    binding.pry
     @project.update(project_params)
     if @project.save
       redirect_to @project 
@@ -37,7 +40,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(
       :name,
       :description,
-      tasks_attributes:[:content, :complete],
+      tasks_attributes:[:content, :complete, :project_id],
       user_ids:[]
     )
   end

@@ -5,6 +5,6 @@
 <li><%= user.name %></li>
 <% end %>
 <p>Tasks</p>
-<% @project.tasks.each do |task| %>
-<li><%= task.content %></li>
+<% @project.tasks.select { |task| task.complete? == false }.each do |task| %>
+<li><%= task.content %> </li>
 <% end %>
