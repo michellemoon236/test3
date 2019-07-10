@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all 
+    @projects = Project.all.select { |project| project.users.include?(current_user) }
   end
 
   def new
@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(
       :name,
       :description,
-      tasks_attributes:[:content, :complete, :project_id],
+      tasks_attributes:[:content, :complete, :project_id, :id],
       user_ids:[]
     )
   end

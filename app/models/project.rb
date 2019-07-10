@@ -5,12 +5,17 @@ class Project < ApplicationRecord
   accepts_nested_attributes_for :tasks, reject_if: proc { |attributes| attributes['content'].blank? }
 
   def tasks_attributes=(tasks)
-    binding.pry
     tasks.each do |t|
       if t[1][:content] != ""
-        task = Task.find_or_create_by(content: t[1][:content])
-        self.tasks << task
-        self.save
+        if Task.find_by(id: t[1][:id]) 
+          task = Task.find_by(id: t[1][:id])
+          task.content = t[1][:content]
+          task.save
+        else
+          task = Task.create(content: t[1][:content])
+          self.tasks << task
+          self.save
+        end
       end
     end
   end

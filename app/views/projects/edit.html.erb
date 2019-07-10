@@ -9,6 +9,7 @@
    <%= f.fields_for :tasks do |task| %>
     <li><%= task.text_field :content %>
     </li><br>
+    <%= task.hidden_field :id %>
     <% end %>
 <%= f.submit %>
 <% end %><br><br>

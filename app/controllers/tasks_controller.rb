@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
 
-  def
-  def complete_task
+  def task_complete
+    binding.pry
     @task = Task.find(params[:id])
     @task.complete = true
     @task.save
-    redirect_to project_path(@task.project_id)
+    binding.pry
+    redirect_to project_path(id: @task.project_id)
   end
   
 end

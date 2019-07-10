@@ -6,6 +6,19 @@
 <% end %>
 <p>Tasks</p>
 <% @project.tasks.select { |task| task.complete? == false }.each do |task| %>
-<li><%= task.content %> </li>
-<p><%= link_to "completed?", task_complete_path %><p>
+<li><%= task.content %></li>
+<%= hidden_field_tag task.id %>
+<p><%= link_to "completed?", task_complete_path, id: task.id %></p>
+
+
+<%= form_tag ({controller: 'tasks', action: 'task_complete', method: 'post'}) do %>
+  <input type=submit value='Completed'>
 <% end %>
+
+<%= form_for task, :url => task_complete_path(task, :method => 'get' do |f| %>
+    <%= f.hidden_field :id %>
+    <%= f.submit value='Completed'%>
+<% end %>
+
+<% end %>
+
