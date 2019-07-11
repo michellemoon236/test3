@@ -4,6 +4,8 @@ class Project < ApplicationRecord
   has_many :tasks
   accepts_nested_attributes_for :tasks, reject_if: proc { |attributes| attributes['content'].blank? }
 
+  validates :name, presence: true
+
   def tasks_attributes=(tasks)
     tasks.each do |t|
       if t[1][:content] != ""
@@ -21,3 +23,10 @@ class Project < ApplicationRecord
   end
 
 end
+
+
+# create_table :projects do |t|
+#   t.string :name
+#   t.string :description
+
+#   t.timestamps

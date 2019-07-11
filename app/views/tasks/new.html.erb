@@ -1,0 +1,7 @@
+<%= form_for @task, :controller => "tasks", :action => "create", :method => 'post' do |f| %>
+  <%= f.hidden_field_tag :project_id %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.submit %>
+<% end %>

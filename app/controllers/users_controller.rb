@@ -10,11 +10,14 @@ class UsersController < ApplicationController
   end
     
   def create
-    return redirect_to(controller: 'users',
-    action: 'new') if params[:user][:password] != params[:user][:password_confirmation]
     @user = User.create(user_params)
-    session[:user_id] = @user.id
-    redirect_to controller: 'users', action: 'home'
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to controller: 'users', action: 'home'
+    else
+      flash[:error] = @user.errors.full_messages
+      render :new
+    end
   end
  
   private

@@ -1,3 +1,9 @@
+<% if flash[:error] %>
+  <% flash[:error].each do |e| %>
+    <li style="color: red"><%= e %></li>
+  <% end %>
+<% end %>
+
 <h1>New Project </h1>
 <%= render partial: 'form' %>
    

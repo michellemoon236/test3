@@ -4,21 +4,20 @@
 <% @project.users.each do |user| %>
 <li><%= user.name %></li>
 <% end %>
-<p>Tasks</p>
-<% @project.tasks.select { |task| task.complete? == false }.each do |task| %>
-<li><%= task.content %></li>
-<%= hidden_field_tag task.id %>
-<p><%= link_to "completed?", task_complete_path, id: task.id %></p>
+<p>Tasks To Do</p>
+<% @project.tasks.select { |task| task.complete == false }.each do |task| %>
+<li><%= task.content %>
 
-
-<%= form_tag ({controller: 'tasks', action: 'task_complete', method: 'post'}) do %>
-  <input type=submit value='Completed'>
-<% end %>
-
-<%= form_for task, :url => task_complete_path(task, :method => 'get' do |f| %>
+<%= form_for task, :url => task_complete_path(task), :method => 'get' do |f| %>
     <%= f.hidden_field :id %>
-    <%= f.submit value='Completed'%>
-<% end %>
+    <%= f.submit value='Completed' %>
+<% end %></li>
 
-<% end %>
+<% end %><br>
 
+<p>Tasks Completed</p>
+<% @project.tasks.select { |task| task.complete == true }.each do |task| %>
+  <li><%= task.content %>
+<% end %><br><br>
+
+<%= link_to "Add More Tasks", new_project_task_path(@project) %>

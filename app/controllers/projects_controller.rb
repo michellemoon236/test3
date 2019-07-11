@@ -5,14 +5,19 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new 
-    4.times do 
+    8.times do 
       @project.tasks.build
     end
   end
 
   def create 
     @project = Project.create(project_params)
-    redirect_to project_path(@project)
+    if @project.save
+      redirect_to project_path(@project)
+    else
+      flash[:error] = @project.errors.full_messages
+      render :new
+    end
   end
 
   def show
