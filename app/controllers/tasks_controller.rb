@@ -1,14 +1,14 @@
 class TasksController < ApplicationController
 
   #required nested index or show route
-  
+
   def new
     @task = Task.new(project_id: params[:project_id])
     binding.pry
   end
 
   def create 
-    @task = Task.new(task_params)
+    @task = Task.create(task_params)
     redirect_to project_path(@project)
   end
 
