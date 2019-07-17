@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
+  resources :tasks
+
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'

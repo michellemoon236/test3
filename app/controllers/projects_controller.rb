@@ -12,13 +12,19 @@ class ProjectsController < ApplicationController
   end
 
   def create 
-    @project = Project.create(project_params)
+    @project = Project.new(project_params)
+    @project.user_projects.each do |user_project|
+      if user_project.user_id == current_user.id
+        user_project.project_creator = true
+      end 
+    end
     if @project.save
       redirect_to project_path(@project)
     else
       flash[:error] = @project.errors.full_messages
       render :new
     end
+    binding.pry
   end
 
   def show
@@ -27,11 +33,11 @@ class ProjectsController < ApplicationController
 
   def edit 
     @project = Project.find(params[:id])
+    binding.pry
   end
 
   def update
     @project = Project.find(params[:id])
-    binding.pry
     @project.update(project_params)
     if @project.save
       redirect_to @project 
